@@ -15,14 +15,13 @@ sqlContext = SQLContext(sc)
 
 """ ----------------------------------- q1.1 ------------------------------------------------------"""
 
-
 # read data from json
 df = sqlContext.read.json("books.json", multiLine=True)
 
 # SQL Query in Spark
 df.registerTempTable("book_table")
 starting_with_f = sqlContext.sql(
-    "SELECT title, author,(2020 - year)  AS since_published  FROM book_table WHERE author LIKE 'F%'")
+    "SELECT title, author,(2022 - year)  AS since_published  FROM book_table WHERE author LIKE 'F%'")
 
 print("------------------- q1.1 -------------------------")
 # Add a column of the difference
@@ -38,7 +37,7 @@ starting_with_f.show()
 
 print("------------------- q1.2 -------------------------")
 
-df = sqlContext.read.json("books.json", multiLine=True)
+#df = sqlContext.read.json("books.json", multiLine=True)
 # df.show()
 
 ##The average number of pages written
@@ -147,7 +146,7 @@ for i in range(11):
 b = 0
 alpha = 0.0001
 
-for iteration in range(1000):
+for iteration in range(1001):
     sum = 0
     i = 0
     while i < len(wi):
@@ -169,6 +168,20 @@ for iteration in range(1000):
         wi[i] -= (alpha * deriv[i])
         i = i + 1
 
+    # if iteration % 1000 == 0:
+    #     i = 0
+    #     a = 1 / 2 * len(data_y)
+    #     sum = 0
+    #
+    #     while i < len(data_y):
+    #         sum += (np.dot(np.array(data_x[i]), np.array(wi)) + b - data_y[i])
+    #         i = i + 1
+    #
+    #     lost = a * math.pow(sum, 2)
+    #     print("mean squared-error ", lost)
+    #     if lost < 0.1:
+    #         break
+
 i = 0
 while i < len(Prediction):
     print("Estimated price : ",
@@ -183,7 +196,6 @@ i = 0
 a = 1 / 2 * len(data_y)
 sum = 0
 
-i = 0
 while i < len(data_y):
     sum += (np.dot(np.array(data_x[i]), np.array(wi)) + b - data_y[i])
     i = i + 1
@@ -230,7 +242,7 @@ with open('q3.csv') as csvfile:
         if i == 1 or i == 7 or i == 17 or i == 27 or i == 37:
 
             Prediction.append(list(np.float_(row)))
-            #print(list(np.float_(row)))
+            # print(list(np.float_(row)))
             i = i + 1
             continue
         else:
@@ -308,25 +320,21 @@ print("+--------------------------+---------------------------------- + \n"
       "| rly negative  - not fire |      0       |        3           | \n"
       "+--------------------------+-----------------------------------+")
 
-
-print("accuracy = 1 + 3       4    \n" 
+print("accuracy = 1 + 3       4    \n"
       "         -------- =   --    \n"
       "          1+1+0+3      5    \n")
 
-print("reacall  =   1         1    \n" 
+print("reacall  =   1         1    \n"
       "         -------- =   --    \n"
       "            1+1        2    \n")
 
-print("precision  =   1         1    \n" 
+print("precision  =   1         1    \n"
       "            -------- =   --   \n"
       "              1+0        1    \n")
 
-
-print("F-measure  = 2 * 1 * 1/2     2    \n" 
+print("F-measure  = 2 * 1 * 1/2     2    \n"
       "             ---------- =   --    \n"
       "               1 + 1/2       3    \n")
-
-
 
 print("------------------- END -------------------------")
 
@@ -362,7 +370,7 @@ reacall = 1     1
         ---- = ----
         1 + 1   2
         
-precision = accuracy, how accurate we are in the category.
+precision = how accurate we are in the category.
 
 precision =   1 
             ------  = 1 
